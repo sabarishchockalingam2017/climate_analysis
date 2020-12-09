@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block content %}
+    <section class="home-section">
+        <div class="page_title">KPIs to keep an eye on</div>
+        <div class="page_title2">Quantifying Environmental Issues with a Social Context</div>
+    </section>
+
+    <section class="introduction-section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8 offset-md-2 content-col">
+                    <p>The Carbon Disclosure Project (CDP) is a global non-profit that drives companies and governments to reduce their greenhouse gas emissions, safeguard water resources, and protect forests. Each year, CDP takes the information supplied in its annual reporting process and scores companies and cities based on their journey through disclosure and towards environmental leadership.</p>
+                    <p>This work attempts to:
+                        <ul>Develop a methodology for calculating key performance indicators (KPIs) that relate to the environmental and social issues that are discussed in the CDP survey data.</ul>
+                        <ul>Discuss the intersection between environmental issues and social issues.</ul>
+                        <ul>Mine information to create automated insight generation demonstrating whether city and corporate ambitions take these factors into account.</ul>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="data-section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8 offset-md-2 content-col">
+                    <p>The data consists of responses from 1032 different cities reported between 2018 and 2020. For simplicity, the 2019 dataset was used as it had the most reporting cities (861) and fairly up-to-date questionaire. Cities reporting in 2019 account for approximately 2.2 billion people. To add perspective, the current world population is 7.6 billion.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <section class="analysis-section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="chart" id="sankeyplot">
+                        <script>
+                            var graphs = {{sankeyplot | safe}};
+                            Plotly.react('sankeyplot',graphs,{});
+                        </script>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
