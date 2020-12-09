@@ -1,9 +1,10 @@
 from flask import Flask, render_template, url_for, flash
 import logging
 import logging.config
-from config.main_config import LOGGING_PATH, LOGGING_CONFIG
+from config.main_config import RESP19_PATH
 import os
-import app.helpers.prediction_handler as predhand
+import pandas as pd
+import visuals as viz
 
 '''This is the flask app and builds the webpage interface for the analysis.'''
 
@@ -13,12 +14,17 @@ app.config.from_object('config.flask_config')
 
 logger = logging.getLogger("app")
 
+# loading response data from 2019 for analysis and visualization
+resp19 = pd.read_csv(RESP19_PATH)
 
 @app.route("/", methods=['GET','POST'])
 @app.route("/home", methods=['GET','POST'])
 def home():
+
+    # hazard to demographic sankey plot
+    hazdemosankey = viz.create_sankey(resp19)
     return render_template('home.html',
-                           title='Home')
+                           sankeyplot=hazdemosankey)
 
 @app.context_processor
 def override_url_for():

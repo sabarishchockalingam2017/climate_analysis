@@ -1,5 +1,6 @@
-import logging
+import logging.config
 from config.main_config import LOGGING_PATH, LOGGING_CONFIG
+from app.app import app
 
 ''' This is a central location to run all files.'''
 
