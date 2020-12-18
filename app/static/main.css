@@ -10,9 +10,8 @@ html, body {
   background: #fa752d;
   color: #ebf8ff;
   font: 16px Sans-Serif;
+  margin: 20px;
 }
-
-
 
 .page_title{
     padding: 2px;
@@ -52,8 +51,30 @@ html, body {
     padding: 10px 20px;
     border: 1px solid #dddddd;
     border-radius: 4px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     justify-content: center;
+    vertical-align: middle;
+}
+
+.card{
+    background: #fc8d51;
+    border: 1px solid #dddddd;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.flex-child {
+    flex: 1;
+}
+
+.flex-child:first-child {
+    margin-right: 20px;
+}
+
+.break-below{
+    margin-bottom: 10px;
 }
 
 .footer-links {
