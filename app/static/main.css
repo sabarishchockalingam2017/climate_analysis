@@ -1,0 +1,96 @@
+* {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+html, body {
+  background: #fa752d;
+  color: #ebf8ff;
+  font: 16px Sans-Serif;
+  margin: 20px;
+}
+
+.page_title{
+    padding: 2px;
+    text-align: center;
+    font-family: Pacifico;
+    font-size: 3em;
+    color: #ebf8ff;
+    animation: fadeIn ease 3s;
+}
+/* Fade in Animation setting for title*/
+@keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+
+.page_title2 {
+    text-align: center;
+    font-family: Pacifico;
+    font-size: 1.5em;
+    color: #ebf8ff;
+    animation: fadeIn2 ease 3s;
+}
+/* Fade in Animation setting for subtitle*/
+@keyframes fadeIn2 {
+    0% {opacity:0;}
+    50% {opacity:0;}
+    100% {opacity:1;}
+}
+
+.home-section{
+    min-height: 800px;
+    padding: 250px 0px;
+}
+
+.content-col{
+    background: #fc8d51;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    justify-content: center;
+    vertical-align: middle;
+}
+
+.card{
+    background: #fc8d51;
+    border: 1px solid #dddddd;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.flex-child {
+    flex: 1;
+}
+
+.flex-child:first-child {
+    margin-right: 20px;
+}
+
+.break-below{
+    margin-bottom: 10px;
+}
+
+.footer-links {
+  color: #cbd5db;
+}
+
+.footer-links:hover {
+  color: #ffffff;
+}
+
+.site-footer {
+    height: 50px;
+    padding: 10px 0px;
+    position: fixed;
+    bottom: 0;
+    background-color: #fa752d;
+    width: 100%;
+}
+

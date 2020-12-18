@@ -1,0 +1,173 @@
+{% extends "layout.html" %}
+{% block content %}
+    <section class="home-section">
+        <div class="page_title">KPIs to keep an eye on</div>
+        <div class="page_title2">Quantifying Environmental Issues with a Social Context</div>
+    </section>
+
+    <section class="introduction-section">
+        <div class="container-fluid">
+            <h2 class="col-md-8 offset-md-2 section-header">The Carbon Disclosure Project</h2>
+
+            <div class="row">
+                <div class="col-md-8 offset-md-2 content-col">
+                    <p>The Carbon Disclosure Project (CDP) is a global non-profit that drives companies and governments to reduce their greenhouse gas emissions, safeguard water resources, and protect forests. Each year, CDP takes the information supplied in its annual reporting process and scores companies and cities based on their journey through disclosure and towards environmental leadership.</p>
+                    <p>This work attempts to:
+                        <ul>Develop a methodology for calculating key performance indicators (KPIs) that relate to the environmental and social issues that are discussed in the CDP survey data.</ul>
+                        <ul>Discuss the intersection between environmental issues and social issues.</ul>
+                        <ul>Mine information to create automated insight generation demonstrating whether city ambitions take these factors into account.</ul>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Load javascript to display interactive visuals-->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+
+    <section class="data-section">
+        <div class="container-fluid">
+            <h2 class="col-md-8 offset-md-2 section-header">Data Description</h2>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body text-left">
+                            <p class="card-text">The data consists of responses from 1032 different cities reported between 2018 and 2020. For simplicity, the 2019 dataset was used as it had the most reporting cities (861) and fairly up-to-date questionaire. Cities reporting in 2019 account for approximately 2.2 billion people. To add perspective, the current world population is 7.6 billion.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8 content-col">
+                    <div class="card">
+                        <div class="chart" id="worldplot">
+                            <script>
+                                var graph = {{worldplot | safe}};
+                                Plotly.react('worldplot',graph,{});
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="row">
+            <div class="col-md-8 content-col">
+                <div class="chart" id="vulplot">
+                    <script>
+                        var graph = {{vulplot | safe}};
+                        Plotly.react('vulplot', graph, {});
+                    </script>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-left">
+                        <p class="card-text">Most cities have created or intend to create detailed risk and vulnerability reports to clearly identify threats due to climate change.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        </div>
+    </section>
+
+
+    <section class="analysis-section">
+        <div class="container-fluid">
+            <h2 class="col-md-8 offset-md-2 section-header">Analysis</h2>
+            <h4 class="col-md-8 offset-md-2 sub-header">Climate Hazards and Adapting</h4>
+
+            <div class="row content-col">
+                <div class="flex-container">
+                    <div class="chart flex-child" id="hazplot">
+                        <script>
+                            var graph = {{hazplot | safe}};
+                            Plotly.react('hazplot', graph, {});
+                        </script>
+                    </div>
+
+                    <div class="chart flex-child" id="adapplot">
+                        <script>
+                            var graph = {{adapplot | safe}};
+                            Plotly.react('adapplot', graph, {});
+                        </script>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row break-below">
+                <div class="col-md-8 offset-md-2">
+                    <div class="card">
+                        <div class="card-body text-left">
+                            <p class="card-text">
+                                The top actions taken to combat climate hazards were planting trees
+                                and flood mapping. These actions directly address the top climate hazards which were extreme
+                                temperatures, precipitation/flooding and drought. These steps are the appropriate approach
+                                to handle the most common issues.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body text-left">
+                            <p class="card-text">
+                                The sankey diagram, to the right, shows the number cities listing a specific popluation as most
+                                affected by a given hazard. Although Extreme Precipitation > rainstorm was the most
+                                listed hazard, certain populations such as elderly, childern and low-income households,
+                                are most impacted by extremely hot temperatures.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8 content-col">
+                    <div class="card">
+                        <div class="chart" id="sankeyplot">
+                            <script>
+                                var graph = {{sankeyplot | safe}};
+                                Plotly.react('sankeyplot',graph,{});
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8 content-col">
+                    <div class="chart" id="adaptfactorsplot">
+                        <script>
+                            var graphs = {{adaptfactorsplot | safe}};
+                            Plotly.react('adaptfactorsplot',graphs,{});
+                        </script>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body text-left">
+                            <p class="card-text">
+                                Cities listed these factors, to the left, as an issue or strength in adapting to climate hazards.
+                                'Access to basic services' was listed about 100 times. About 30 cities have adequate
+                                access to basic services and have listed them as a support adapting to climate change.
+                                70 cities still need bolstering of basic services and studying the strategy of the
+                                aformentioned 30 could reveal insights to address this challenge. <br>
+                                <br>
+                                Budgetary capacity was almost always listed as a challenge suggesting more funds are
+                                needed for adaption plans.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>
+    </section>
+{% endblock content %}

@@ -10,3 +10,6 @@ PROJECT_HOME = dirname(dirname(path.abspath(__file__)))
 LOGGING_PATH = pathlib.PurePosixPath(Path(path.join(PROJECT_HOME, "logs", "run_log.log")))
 LOGGING_CONFIG = Path(PROJECT_HOME, "config", "logging", "local.conf")
 MODEL_PATH = path.join(PROJECT_HOME,'models', 'ft_model.bin')
+
+RESP19_PATH = Path(PROJECT_HOME, "data", "Cities", "Cities Responses", "2019_Full_Cities_Dataset.csv")
+CITIES19_PATH = Path(PROJECT_HOME, "data", "Cities", "Cities Disclosing", "2019_Cities_Disclosing_to_CDP.csv")
