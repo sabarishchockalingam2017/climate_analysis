@@ -23,7 +23,7 @@ resp19 = pd.read_csv(RESP19_PATH)
 def home():
 
     # world map showing reporting cities
-    worldmap = viz.create_worldmap(cities19)
+    worldmap, worldplotleg = viz.create_worldmap(cities19)
 
     # hazard to demographic sankey plot
     hazdemosankey = viz.create_sankey(resp19)
@@ -44,6 +44,7 @@ def home():
     return render_template('home.html',
                            sankeyplot=hazdemosankey,
                            worldplot=worldmap,
+                           worldplotlegend=worldplotleg,
                            vulplot=vulassesplot,
                            hazplot=hazbarplot,
                            adapplot=adapbarplot,
