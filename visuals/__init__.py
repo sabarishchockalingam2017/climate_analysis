@@ -2,10 +2,10 @@ import pandas as pd
 import plotly
 import plotly.graph_objects as go
 import plotly.express as px
-from shapely import wkt
 import json
 import numpy as np
 import matplotlib.colors as randcolors
+import re
 
 ''' Functions to create interactive plotly visualizations and pass on to Flask app'''
 
@@ -89,6 +89,16 @@ def create_sankey(respdata):
     return vizJSON
 
 
+def getlonlat(ptstr):
+    ''' Gets longtitude and latitude from string of format POINT(lon lat)'''
+    if type(ptstr) == str:
+        numstr = re.findall('[0-9.-]+',ptstr)
+        lonval=float(numstr[0])
+        latval=float(numstr[1])
+        return [lonval, latval]
+    else:
+        return np.nan
+
 def create_worldmap(citydata):
     """ Creates world map visual showing populations of reporting cities.
     Args:
@@ -99,10 +109,9 @@ def create_worldmap(citydata):
     """
 
     tempdf = citydata[['City', 'Country', 'Population', 'City Location']].dropna(subset=['City Location'])
-    tempdf['City Location'] = tempdf['City Location'].apply(wkt.loads)
 
-    tempdf['lon'] = tempdf['City Location'].apply(lambda point: point.x)
-    tempdf['lat'] = tempdf['City Location'].apply(lambda point: point.y)
+    tempdf['lon'] = tempdf['City Location'].apply(lambda point: getlonlat(point)[0])
+    tempdf['lat'] = tempdf['City Location'].apply(lambda point: getlonlat(point)[1])
 
     # population 2 has nas filled with mean to prevent errors when plotting size according to population
     tempdf['Population2'] = tempdf.Population.fillna(tempdf.Population.mean())
@@ -123,7 +132,8 @@ def create_worldmap(citydata):
         text=tempdf.markertext,
         marker=
         dict(
-            size=tempdf.PopLim / scale
+            size=tempdf.PopLim / scale,
+            color='#7079fb'
         )
     )
     )
@@ -134,7 +144,55 @@ def create_worldmap(citydata):
                       font_size=10,)
     vizJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 
-    return vizJSON
+    legJSON = create_worldplotlegend(tempdf, scale)
+
+    return vizJSON, legJSON
+
+def create_worldplotlegend(proccitydata, popscale):
+    ''' PLot legend of world map separately as Plotly does not have size legend functionality'''
+
+    tempdf = proccitydata
+
+    scale = popscale
+    legdiv = 6
+    legspace = 0.5
+    legmin = sorted(tempdf.PopLim)[10]
+    legmax = np.max(tempdf['PopLim'])
+    legtext = np.linspace(legmin, legmax, legdiv)
+    legtext = [readable_num(popnum) for popnum in legtext]
+    legtext[0] = '<'+legtext[0]
+    legtext[legdiv-1] = '>'+legtext[legdiv-1]
+    legend_sizes = np.linspace(legmin/scale, legmax/scale, legdiv)
+    legend_pos = np.linspace(0, legdiv * legspace, legdiv)
+
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(y=np.ones(legdiv),
+                             x=legend_pos,
+                             marker=dict(size=legend_sizes,
+                                         color='#7079fb'),
+                             mode='markers+text',
+                             text= legtext,
+                             textposition = 'bottom center',
+                             hoverinfo='skip'
+                             )
+                  )
+    fig.update_layout(plot_bgcolor='rgba(0,0,0,0)',
+                      showlegend=False, title='Popluation Scale',
+                      margin=dict(l=0,r=0,t=25,b=0), height=100)
+    fig.update_xaxes(visible=False, fixedrange=True)
+    fig.update_yaxes(visible=False, fixedrange=True)
+
+    legJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+
+    return legJSON
+
+def readable_num(num):
+    ''' Formats large numbers to be readable'''
+    magnitude = 0
+    while abs(num) >= 1000:
+        magnitude += 1
+        num /= 1000.0
+    return '%.2f%s' % (num, ['', 'K', 'M', 'G', 'T', 'P'][magnitude])
 
 def create_vulassesbar(respdata):
     """ Creates bar chart counting cities with climate change vulnerability assessments.
