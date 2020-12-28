@@ -57,25 +57,25 @@
                 </div>
             </div>
 
-        <div class="row">
-            <div class="col-md-8 content-col">
-                <div class="chart" id="vulplot">
-                    <script>
-                        var graph = {{vulplot | safe}};
-                        Plotly.react('vulplot', graph, {});
-                    </script>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body text-left">
-                        <p class="card-text">Most cities have created or intend to create detailed risk and vulnerability reports to clearly identify threats due to climate change.</p>
+            <div class="row">
+                <div class="col-md-8 content-col">
+                    <div class="chart" id="vulplot">
+                        <script>
+                            var graph = {{vulplot | safe}};
+                            Plotly.react('vulplot', graph, {});
+                        </script>
                     </div>
                 </div>
-            </div>
 
-        </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body text-left">
+                            <p class="card-text">Most cities have created or intend to create detailed risk and vulnerability reports to clearly identify threats due to climate change.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
 
         </div>
     </section>
@@ -173,7 +173,27 @@
                 </div>
 
             </div>
-            
+
+            <h4 class="col-md-8 offset-md-2 sub-header">Clustering Analysis</h4>
+
+            <div class="row">
+                <div class="col-md-8 offset-md-2 content-col">
+                    <p>Clustering analysis was done separately for categorical and numerical features. The features are listed below</p>
+                    <p>Categorical Features
+
+                    </p>
+                    <p>Numerical Features
+                        <li> Emissions Data
+                            <ul>
+                                <li>Agriculture, Forestry and Land Use – Scope 1 (V)</li>
+                                <li>Industrial Processes and Product Use – Scope 1 (IV)</li>
+                                <li></li>
+                            </ul>
+                        </li>
+                    </p>
+                </div>
+            </div>
+
         </div>
     </section>
 {% endblock content %}
