@@ -11,7 +11,7 @@
 - [Run the application](#run-the-application)
 
 ## Project Description
-A Flask app presenting my work for a Kaggle competition working with Climate Disclosure Project data. Goals are to 
+A Flask app presenting my analysis of the Carbon Disclosure Project's data (hosted on Kaggle). Goals are to 
 to mine for insights and devise KPIs for better assessing problems arising from climate change.
 
 ## Repo structure 
