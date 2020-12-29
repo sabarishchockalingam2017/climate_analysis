@@ -6,7 +6,7 @@
     </section>
 
     <section class="introduction-section">
-        <div class="container-fluid">
+        <div class="container">
             <h2 class="col-md-8 offset-md-2 section-header">The Carbon Disclosure Project</h2>
 
             <div class="row">
@@ -27,11 +27,11 @@
 
 
     <section class="data-section">
-        <div class="container-fluid">
+        <div class="container">
             <h2 class="col-md-8 offset-md-2 section-header">Data Description</h2>
 
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="card">
                         <div class="card-body text-left">
                             <p class="card-text">The data consists of responses from 1032 different cities reported between 2018 and 2020. For simplicity, the 2019 dataset was used as it had the most reporting cities (861) and fairly up-to-date questionaire. Cities reporting in 2019 account for approximately 2.2 billion people. To add perspective, the current world population is 7.6 billion.</p>
@@ -39,7 +39,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-8 content-col">
+                <div class="col-md-9 content-col">
                     <div class="card">
                         <div class="chart" id="worldplot">
                             <script>
@@ -82,7 +82,7 @@
 
 
     <section class="analysis-section">
-        <div class="container-fluid">
+        <div class="container">
             <h2 class="col-md-8 offset-md-2 section-header">Analysis</h2>
             <h4 class="col-md-8 offset-md-2 sub-header">Climate Hazards and Adapting</h4>
 
@@ -175,6 +175,21 @@
             </div>
 
             <h4 class="col-md-8 offset-md-2 sub-header">Clustering Analysis</h4>
+            <h5 class="col-md-8 offset-md-2 sub-header">Categorical Feature Clustering</h5>
+
+            <div class="row break-below">
+                <div class="col-md-8 offset-md-2">
+                    <div class="card">
+                        <div class="card-body text-left">
+                            <p class="card-text">
+                                Kmodes clustering was performed to cluster categorical data. Cost decrease was lower after 3 clusters when observing the cost vs number of clusters plot, .
+                                Therefore, 3 clusters were chosen for final cluster results.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-md-10 offset-md-1 content-col">
                     <div class="row justify-content-md-center align-items-center">
@@ -190,15 +205,146 @@
                 </div>
             </div>
 
+            <div class="row break-below">
+                <div class="col-md-8 offset-md-2">
+                    <div class="card">
+                        <div class="card-body text-left">
+                            <p class="card-text">
+                                Kmodes clustering showed that the most distinguishing features were
+                                <b>whether a Renewable Energy Target exists</b> and <b>whether a Risk and Vulnerability
+                                assessment was created</b>. <b>Business partnerships for sustainability projects</b>
+                                was the next most distinguishing feature. The other categorical features did not serve
+                                well to create distinct clusters from the rest of the data.
+                                <br>
+                                <br>
+                                Clustering revealed there to be 3 most common tiers of cities: <br>
+                                <ul>
+                                    <li>Cities who have Risk Vulnerability assessments but do not Renewable Energy
+                                        Targets or Collaborate with Businesses.</li>
+
+                                    <li>Cities who Intend to create Risk Vulnerability Assessments, Renewable Energy
+                                        Targets and Business Partnerships.</li>
+
+                                    <li>Cities who have Risk Vulnerability Assesments, have Renewable Energy Targets
+                                        and Collaborate with Businesses on Sustainability.</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="row break-below">
+                <div class="col-md-8 offset-md-2">
+                    <div class="card">
+                        <div class="card-body text-left">
+                            <p class="card-text">
+                                These clusters can be thought to be a graded system in which cities are graded as being
+                                <b>limited, intermediate or advanced</b> in their progress of addressing environmental
+                                issues. Extending this idea, cities can even be scored by simply adding the number of
+                                steps taken. For example if a city has a renewable target and risk assessment, it
+                                would have covered 2 of the 7 steps (represented as columns in the above dataframe).
+                                Of course this is a rudimentary system, and needs more complexity to truly represent a
+                                cities readiness for the issues at hand. Another idea is adding more weight to certain
+                                steps. For example, establishing funds to invest in sustainability projects should hold
+                                more weight than creating a risk assessment. Such a system would be subject and it would
+                                be best to get expert opinion to assess how much weight experts would give to each step.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <h5 class="col-md-8 offset-md-2 sub-header">Numerical Feature Clustering</h5>
+            <div class="row break-below">
+                <div class="col-md-8 offset-md-2">
+                    <div class="card">
+                        <div class="card-body text-left">
+                            <p class="card-text">
+                                Kmeans clustering was performed to cluster numerical data. The SSE vs cluster plot
+                                showed 2 clusters to be good. Cluster centroids are shown in the table below. The centroids
+                                are for the standardized numerical feature values.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-md-10 offset-md-1 content-col">
-                    <div class="row justify-content-md-center align-self-center">
+                    <div class="row justify-content-md-center align-items-center">
                         <div class="col-md-4">
                                 <img src="{{ url_for('static',filename='images/NumClust_Lplot.jpg') }}"
                                      alt="numlplot_img" class="img-fluid">
                         </div>
                         <div class="dfdiv col-md-7">
                             {{ numclusttab|safe }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row break-below">
+                <div class="col-md-8 offset-md-2">
+                    <div class="card">
+                        <div class="card-body text-left">
+                            <p class="card-text">
+                                Kmeans clustering revealed there to be two common classes of cities. Cities with low
+                                emissions and cities with high emissions. The emmission data was divided by the city's
+                                base year population, therfore it is analagous to per capita emmissions. Emmissions
+                                data was the key distinguishing factor. Data on waste, renewable energy, and
+                                transportation did not play highly decisive roles in clustering. <br>
+                                <br>
+                                There was quite a bit of imputed data. 84 of 910 cities reported waste per capita,
+                                therefore it likely did not hold great weight in distinguishing cities
+                                (the rest of the 826 cities were imputed to have 36222kg/person/year waste).
+                                The number of green jobs had a similar amount of missing data with about 53 cities
+                                reporting the metric.<br>
+                                <br>
+                                Similar to clustering with categorical variables, these clusters can also be thought
+                                to be graded. The high emmissions cluster being limited in progress tier and
+                                low emissions cluster being the advanced tier.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row break-below">
+                <div class="col-md-8 offset-md-2">
+                    <div class="card">
+                        <div class="card-body text-left">
+                            <p class="card-text">
+                               It is important to keep in mind the clustering results are relative.
+                                Even if a city is classified into an advanced tier does not mean it can't improve.
+                                It means they have set the precedent for other cities to follow but should still
+                                continue pioneering until climate change is no longer a threat. This scoring system
+                                would also change as time passes and new technologies develop. Cities in the current
+                                advance tier could fall behind into lower tiers if they do not keep up with new
+                                technology.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="conclusion-section">
+        <div class="container">
+            <h2 class="col-md-8 offset-md-2 section-header">Conclusion</h2>
+
+            <div class="row break-below">
+                <div class="col-md-8 offset-md-2">
+                    <div class="card">
+                        <div class="card-body text-left">
+                            <p class="card-text">
+                                Climate change is looming. This study showed that climate change is on the minds' of
+                                city administrations. Most cities have risk assessments to plan for the future and are
+                                already taking action. The plans being set into action are a promising foundation for a
+                                sustainable future for all. Continuing to improve the design of this KPI will help us
+                                stay on track by quantifying our progress towards that future.
+                            </p>
                         </div>
                     </div>
                 </div>

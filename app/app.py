@@ -44,10 +44,10 @@ def home():
 
     # clustering results
     # clustering centroids tables
-    catclustdf = pd.read_csv(Path(DATA_PATH, 'catclustresults.csv'), index_col=None)\
-        .to_html(classes='catclust', header="true", index=False)
-    numclustdf = pd.read_csv(Path(DATA_PATH, 'numclustresults.csv'), index_col=None)\
-        .to_html(classes='numclust', header="true", index=False)
+    catclustdf = pd.read_csv(Path(DATA_PATH, 'catclustresults.csv'), index_col=None)
+    catclusttab = catclustdf.to_html(classes='catclust', header="true", index=False)
+    numclustdf = pd.read_csv(Path(DATA_PATH, 'numclustresults.csv'))
+    numclusttab = numclustdf.to_html(classes='numclust', header="true", index=False)
 
     return render_template('home.html',
                            sankeyplot=hazdemosankey,
@@ -57,8 +57,8 @@ def home():
                            hazplot=hazbarplot,
                            adapplot=adapbarplot,
                            adaptfactorsplot=adfactbarplot,
-                           catclusttab=catclustdf,
-                           numclusttab=numclustdf
+                           catclusttab=catclusttab,
+                           numclusttab=numclusttab
                            )
 
 @app.context_processor
