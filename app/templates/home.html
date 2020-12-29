@@ -124,9 +124,9 @@
                     <div class="card">
                         <div class="card-body text-left">
                             <p class="card-text">
-                                The sankey diagram, to the right, shows the number cities listing a specific popluation as most
+                                The sankey diagram, to the right, shows the number cities listing a specific demographic as most
                                 affected by a given hazard. Although Extreme Precipitation > rainstorm was the most
-                                listed hazard, certain populations such as elderly, childern and low-income households,
+                                listed hazard, certain populations such as the elderly, children and low-income households,
                                 are most impacted by extremely hot temperatures.
                             </p>
                         </div>
@@ -175,25 +175,34 @@
             </div>
 
             <h4 class="col-md-8 offset-md-2 sub-header">Clustering Analysis</h4>
-
             <div class="row">
-                <div class="col-md-8 offset-md-2 content-col">
-                    <p>Clustering analysis was done separately for categorical and numerical features. The features are listed below</p>
-                    <p>Categorical Features
+                <div class="col-md-10 offset-md-1 content-col">
+                    <div class="row justify-content-md-center align-items-center">
+                        <div class="col-md-4">
+                            <img src="{{ url_for('static',filename='images/CatClust_Lplot.jpg') }}"
+                                 alt="numlplot_img" class="img-fluid">
+                        </div>
 
-                    </p>
-                    <p>Numerical Features
-                        <li> Emissions Data
-                            <ul>
-                                <li>Agriculture, Forestry and Land Use – Scope 1 (V)</li>
-                                <li>Industrial Processes and Product Use – Scope 1 (IV)</li>
-                                <li></li>
-                            </ul>
-                        </li>
-                    </p>
+                        <div class="dfdiv col-md-7">
+                            {{ catclusttab|safe }}
+                        </div>
+                    </div>
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-md-10 offset-md-1 content-col">
+                    <div class="row justify-content-md-center align-self-center">
+                        <div class="col-md-4">
+                                <img src="{{ url_for('static',filename='images/NumClust_Lplot.jpg') }}"
+                                     alt="numlplot_img" class="img-fluid">
+                        </div>
+                        <div class="dfdiv col-md-7">
+                            {{ numclusttab|safe }}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 {% endblock content %}

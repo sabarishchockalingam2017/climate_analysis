@@ -77,6 +77,11 @@ html, body {
     margin-bottom: 10px;
 }
 
+.dfdiv{
+    overflow: auto;
+    padding-left: 20px;
+}
+
 .footer-links {
   color: #cbd5db;
 }
