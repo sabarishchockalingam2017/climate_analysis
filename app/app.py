@@ -1,10 +1,11 @@
 from flask import Flask, render_template, url_for, flash
 import logging
 import logging.config
-from config.main_config import CITIES19_PATH, RESP19_PATH
+from config.main_config import CITIES19_PATH, RESP19_PATH, DATA_PATH, PROJECT_HOME
 import os
 import pandas as pd
 import visuals as viz
+from pathlib import Path
 
 '''This is the flask app and builds the webpage interface for the analysis.'''
 
@@ -41,6 +42,13 @@ def home():
     # bar chart showing factors affecting adaptation
     adfactbarplot = viz.create_adaptfactorsplot(resp19)
 
+    # clustering results
+    # clustering centroids tables
+    catclustdf = pd.read_csv(Path(DATA_PATH, 'catclustresults.csv'), index_col=None)\
+        .to_html(classes='catclust', header="true", index=False)
+    numclustdf = pd.read_csv(Path(DATA_PATH, 'numclustresults.csv'), index_col=None)\
+        .to_html(classes='numclust', header="true", index=False)
+
     return render_template('home.html',
                            sankeyplot=hazdemosankey,
                            worldplot=worldmap,
@@ -48,7 +56,9 @@ def home():
                            vulplot=vulassesplot,
                            hazplot=hazbarplot,
                            adapplot=adapbarplot,
-                           adaptfactorsplot=adfactbarplot
+                           adaptfactorsplot=adfactbarplot,
+                           catclusttab=catclustdf,
+                           numclusttab=numclustdf
                            )
 
 @app.context_processor
