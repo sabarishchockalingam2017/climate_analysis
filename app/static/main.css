@@ -10,7 +10,8 @@ html, body {
   background: #fa752d;
   color: #ebf8ff;
   font: 16px Sans-Serif;
-  margin: 20px;
+  margin: 30px;
+  width: 100%;
 }
 
 .page_title{
@@ -77,6 +78,28 @@ html, body {
     margin-bottom: 10px;
 }
 
+.dfdiv{
+    overflow: auto;
+}
+
+table.dataframe, .dataframe th, .dataframe td {
+  border: none;
+  border-bottom: 1px solid #C8C8C8;
+  border-collapse: collapse;
+  text-align:left;
+  padding: 10px;
+  font-size: 0.9em;
+  color: black;
+}
+
+.dataframe th, .dataframe tbody tr td:first-child {
+    background-color: #46a3cf;
+    color: white;
+}
+
+.dataframe tr:nth-child(odd)		{ background-color:#eee; }
+.dataframe tr:nth-child(even)	{ background-color:#fff; }
+
 .footer-links {
   color: #cbd5db;
 }
@@ -92,5 +115,6 @@ html, body {
     bottom: 0;
     background-color: #fa752d;
     width: 100%;
+    justify-content: center;
 }
 
