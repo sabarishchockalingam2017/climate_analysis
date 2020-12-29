@@ -28,8 +28,8 @@ if __name__=='__main__':
 
     args = parser.parse_args()
 
-    # if run_clustering passed, run clustering
+    # if run_clustering passed, run clustering only
     if hasattr(args, 'func'):
         args.func(args)
-
-    run_app()
+    else:
+        run_app()
