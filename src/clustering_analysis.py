@@ -42,7 +42,9 @@ def cat_clust(citycompile):
     plt.title('Cost vs Number of Clusters');
     plt.xlabel('Clusters');
     plt.ylabel('Cost');
-    plt.savefig(Path(DATA_PATH, 'CatClust_Lplot.jpg'));
+    # saving to flask app static/images folder
+    plt.savefig(Path(PROJECT_HOME, 'app', 'static', 'images', 'CatClust_Lplot.jpg'));
+    plt.close()
 
     citycatvars = citycompile.select_dtypes(include='object')
     catcols = citycatvars.columns
@@ -59,7 +61,10 @@ def cat_clust(citycompile):
     shape = kmodes.shape
 
     clustdf = pd.DataFrame(data=kmodes, columns=catcols)
-    clustdf.to_csv(Path(DATA_PATH,'catclustresults.csv'))
+    clustdf = clustdf.reset_index()
+    clustdf = clustdf.rename(columns={'index':'Cluster'})
+    clustdf.Cluster = clustdf.Cluster + 1
+    clustdf.to_csv(Path(DATA_PATH,'catclustresults.csv'), index=False)
 
 def num_clust(citycompile):
     ''' Clustering for numerical features.
@@ -94,14 +99,18 @@ def num_clust(citycompile):
     plt.xticks(range(1, 11));
     plt.xlabel("Number of Clusters");
     plt.ylabel("SSE");
-    plt.savefig(Path(DATA_PATH, 'NumClust_Lplot.jpg'));
+    plt.savefig(Path(PROJECT_HOME, 'app', 'static', 'images', 'NumClust_Lplot.jpg'));
+    plt.close();
 
     kmeans = KMeans(n_clusters=2, **kmeans_kwargs)
     kmeans.fit(scaled_features)
     sse.append(kmeans.inertia_)
 
     clustdf = pd.DataFrame(kmeans.cluster_centers_, columns=citynumvars.columns)
-    clustdf.to_csv(Path(DATA_PATH,'numclustresults.csv'))
+    clustdf = clustdf.reset_index()
+    clustdf = clustdf.rename(columns={'index':'Cluster'})
+    clustdf.Cluster = clustdf.Cluster + 1
+    clustdf.to_csv(Path(DATA_PATH,'numclustresults.csv'), index=False)
 
 def run_clustering(args=None):
     ''' Processes data and ouputs clustering analysis results. '''
